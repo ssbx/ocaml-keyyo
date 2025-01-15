@@ -19,7 +19,7 @@
  (name keyyo)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml)
+ (depends ocaml atdgen yojson)
  (tags
   ("add topics" "to describe" your project)))
 
