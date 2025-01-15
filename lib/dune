@@ -1,0 +1,7 @@
+(include_subdirs qualified)
+
+(library
+ (public_name keyyo)
+ (name keyyo)
+ (libraries atdgen yojson))
+ ;;(libraries logs curly uri yojson atdgen))
