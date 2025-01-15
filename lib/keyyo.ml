@@ -5,8 +5,26 @@ module Types = struct
   module Defs_j = Data.Definitions_j
   module Defs_v = Data.Definitions_v
 
-  module Scope = struct
+  module Status = struct
+    type t = Defs_t.k_Status_t
+    let of_json = Defs_j.k_Status_t_of_string
+    let to_json = Defs_j.string_of_k_Status_t
+  end
 
+  module BlockingStatus = struct
+    type t = Defs_t.k_Blocking_status_t
+    let of_json = Defs_j.k_Blocking_status_t_of_string
+    let to_json = Defs_j.string_of_k_Blocking_status_t
+  end
+
+  module Options = struct
+    type t = Defs_t.k_Options_t
+    let of_json = Defs_j.k_Options_t_of_string
+    let to_json = Defs_j.string_of_k_Options_t
+  end
+
+
+  module Scope = struct
     (** 
      * Scopes are strings that enable access to specific resources. Please 
      * refer to the OAuth Documentation for additional information.
@@ -69,24 +87,7 @@ module Types = struct
     let create = Defs_v.create_k_ACDService_t
     let to_pretty_json v = to_json v |> Yojson.Safe.prettify
 
-    module Status = struct
-      type t = Defs_t.k_ACDService_status_t
-      let of_json = Defs_j.k_ACDService_status_t_of_string
-      let to_json = Defs_j.string_of_k_ACDService_status_t
     end
-
-    module BlockingStatus = struct
-      type t = Defs_t.k_ACDService_blocking_status_t
-      let of_json = Defs_j.k_ACDService_blocking_status_t_of_string
-      let to_json = Defs_j.string_of_k_ACDService_blocking_status_t
-    end
-
-    module Options = struct
-      type t = Defs_t.k_ACDService_options_t
-      let of_json = Defs_j.k_ACDService_options_t_of_string
-      let to_json = Defs_j.string_of_k_ACDService_options_t
-    end
-  end
 
   module AudioFile = struct
 
@@ -191,10 +192,254 @@ module Types = struct
      * name 	CTI plugin's name enabled 	Whether or not this plugin 
      * is enabled *)
 
-    let create = Defs_v.create_k_CSIToken_t
+    let create = Defs_v.create_k_CTIPlugin_t
     let of_json = Defs_j.k_CTIPlugin_t_of_string
-    let to_json = Defs_j.string_of_k_CSIToken_t
+    let to_json = Defs_j.string_of_k_CTIPlugin_t
     let to_pretty_json v = to_json v |> Yojson.Safe.prettify
 
   end
+
+  module CTIPluginParameter = struct
+
+    type t = Defs_t.k_CTIPluginParameter_t
+
+    let create = Defs_v.create_k_CTIPluginParameter_t
+    let of_json = Defs_j.k_CTIPluginParameter_t_of_string
+    let to_json = Defs_j.string_of_k_CTIPluginParameter_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module DataUsageStatistic = struct
+
+    type t = Defs_t.k_DataUsageStatistic_t
+
+    let create = Defs_v.create_k_DataUsageStatistic_t
+    let of_json = Defs_j.k_DataUsageStatistic_t_of_string
+    let to_json = Defs_j.string_of_k_DataUsageStatistic_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module DirectoryContact = struct
+
+    type t = Defs_t.k_DirectoryContact_t
+
+    let create = Defs_v.create_k_DirectoryContact_t
+    let of_json = Defs_j.k_DirectoryContact_t_of_string
+    let to_json = Defs_j.string_of_k_DirectoryContact_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module DirectoryBranch = struct
+
+    type t = Defs_t.k_DirectoryBranch_t
+
+    let create = Defs_v.create_k_DirectoryBranch_t
+    let of_json = Defs_j.k_DirectoryBranch_t_of_string
+    let to_json = Defs_j.string_of_k_DirectoryBranch_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module DSLAccess = struct
+
+    type t = Defs_t.k_DSLAccess_t
+
+    let create = Defs_v.create_k_DSLAccess_t
+    let of_json = Defs_j.k_DSLAccess_t_of_string
+    let to_json = Defs_j.string_of_k_DSLAccess_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module EmailAccount = struct
+
+    type t = Defs_t.k_EmailAccount_t
+
+    let create = Defs_v.create_k_EmailAccount_t
+    let of_json = Defs_j.k_EmailAccount_t_of_string
+    let to_json = Defs_j.string_of_k_EmailAccount_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module FaxTransfer = struct
+
+    type t = Defs_t.k_FaxTransfer_t
+
+    let create = Defs_v.create_k_FaxTransfer_t
+    let of_json = Defs_j.k_FaxTransfer_t_of_string
+    let to_json = Defs_j.string_of_k_FaxTransfer_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module MinutePlanStatistic = struct
+
+    type t = Defs_t.k_MinutePlanStatistic_t
+
+    let create = Defs_v.create_k_MinutePlanStatistic_t
+    let of_json = Defs_j.k_MinutePlanStatistic_t_of_string
+    let to_json = Defs_j.string_of_k_MinutePlanStatistic_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module MobileAccount = struct
+
+    type t = Defs_t.k_MobileAccount_t
+
+    let create = Defs_v.create_k_MobileAccount_t
+    let of_json = Defs_j.k_MobileAccount_t_of_string
+    let to_json = Defs_j.string_of_k_MobileAccount_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module Number = struct
+
+    type t = Defs_t.k_Number_t
+
+    let create = Defs_v.create_k_Number_t
+    let of_json = Defs_j.k_Number_t_of_string
+    let to_json = Defs_j.string_of_k_Number_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module NumberTranslation = struct
+
+    type t = Defs_t.k_NumberTranslation_t
+
+    let create = Defs_v.create_k_NumberTranslation_t
+    let of_json = Defs_j.k_NumberTranslation_t_of_string
+    let to_json = Defs_j.string_of_k_NumberTranslation_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module Offer = struct
+
+    type t = Defs_t.k_Offer_t
+
+    let create = Defs_v.create_k_Offer_t
+    let of_json = Defs_j.k_Offer_t_of_string
+    let to_json = Defs_j.string_of_k_Offer_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module Profile = struct
+
+    type t = Defs_t.k_Profile_t
+
+    let create = Defs_v.create_k_Profile_t
+    let of_json = Defs_j.k_Profile_t_of_string
+    let to_json = Defs_j.string_of_k_Profile_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module ProvisioningTask = struct
+
+    type t = Defs_t.k_ProvisioningTask_t
+
+    let create = Defs_v.create_k_ProvisioningTask_t
+    let of_json = Defs_j.k_ProvisioningTask_t_of_string
+    let to_json = Defs_j.string_of_k_ProvisioningTask_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module ServiceUpgrade = struct
+
+    type t = Defs_t.k_ServiceUpgrade_t
+
+    let create = Defs_v.create_k_ServiceUpgrade_t
+    let of_json = Defs_j.k_ServiceUpgrade_t_of_string
+    let to_json = Defs_j.string_of_k_ServiceUpgrade_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+
+  module SIPRecord = struct
+
+    type t = Defs_t.k_SIPRecord_t
+
+    let create = Defs_v.create_k_SIPRecord_t
+    let of_json = Defs_j.k_SIPRecord_t_of_string
+    let to_json = Defs_j.string_of_k_SIPRecord_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module UCaaSVoIPAccount = struct
+
+    type t = Defs_t.k_UCaaSVoIPAccount_t
+
+    let create = Defs_v.create_k_UCaaSVoIPAccount_t
+    let of_json = Defs_j.k_UCaaSVoIPAccount_t_of_string
+    let to_json = Defs_j.string_of_k_UCaaSVoIPAccount_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module VirtualFaxAccount = struct
+
+    type t = Defs_t.k_VirtualFaxAccount_t
+
+    let create = Defs_v.create_k_VirtualFaxAccount_t
+    let of_json = Defs_j.k_VirtualFaxAccount_t_of_string
+    let to_json = Defs_j.string_of_k_VirtualFaxAccount_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module Voicemail = struct
+
+    type t = Defs_t.k_Voicemail_t
+
+    let create = Defs_v.create_k_Voicemail_t
+    let of_json = Defs_j.k_Voicemail_t_of_string
+    let to_json = Defs_j.string_of_k_Voicemail_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module VoIPAccountProfile = struct
+
+    type t = Defs_t.k_VoIPAccountProfile_t
+
+    let create = Defs_v.create_k_VoIPAccountProfile_t
+    let of_json = Defs_j.k_VoIPAccountProfile_t_of_string
+    let to_json = Defs_j.string_of_k_VoIPAccountProfile_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
+  module VoicemailMessage = struct
+
+    type t = Defs_t.k_VoicemailMessage_t
+
+    let create = Defs_v.create_k_VoicemailMessage_t
+    let of_json = Defs_j.k_VoicemailMessage_t_of_string
+    let to_json = Defs_j.string_of_k_VoicemailMessage_t
+    let to_pretty_json v = to_json v |> Yojson.Safe.prettify
+
+  end
+
 end

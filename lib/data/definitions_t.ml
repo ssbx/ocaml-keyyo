@@ -1,11 +1,141 @@
 (* Auto-generated from "definitions.atd" *)
 [@@@ocaml.warning "-27-32-33-35-39"]
 
+type k_Voicemail_t = {
+  name: string;
+  email: string;
+  recording_enabled: bool;
+  instructions_enabled: bool;
+  answering_audio_file_id: int;
+  recording_audio_file_id_unavailable: int;
+  recording_audio_file_id_busy: int
+}
+
+type k_VoicemailMessage_t = {
+  read: bool;
+  identifier: int;
+  caller_id: int;
+  timestamp: int;
+  duration: int;
+  wav_contents: string
+}
+
+type k_VoIPAccountProfile_t = {
+  identifier: string;
+  name: string;
+  backup_number: string;
+  forced: bool;
+  forward_delay: int;
+  forward_on_no_answer_number: int;
+  forward_to_voicemail: bool;
+  forward_unconditionally_number: string;
+  forward_use_account_callerid_presentation: bool
+}
+
+type k_Status_t = [
+    `In_service | `Setup_pending | `Suspended | `Cancelled
+  | `Cancellation_pending
+]
+
+type k_Options_t = [ `Sms | `Crypt | `Supervision | `Iphone ]
+
+type k_Blocking_status_t = [ `Pending | `Blocked ]
+
+type k_VirtualFaxAccount_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  email: string;
+  password: string
+}
+
 type k_Unit_t = [ `Second | `Sms | `Ko | `Mo | `Textmms | `Mms ]
+
+type k_UCaaSVoIPAccount_t = {
+  csi: int;
+  formatted_csi: int;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  short_number: int;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string
+}
+
+type k_ServiceUpgrade_t = {
+  result: string;
+  target_offer_id: int;
+  planned_date: string
+}
 
 type k_Scope_t = [
     `Full_access | `Full_access_read_only | `Voip_profiles_admin | `Cti_admin
 ]
+
+type k_SIPRecord_t = {
+  private_ip: string;
+  public_ip: string;
+  user_agent: string;
+  cdi: string
+}
+
+type k_ProvisioningTask_status_t = [
+    `Status_TODO | `Status_WAIT | `Status_DONE | `Status_ERROR
+  | `Status_CANCEL | `Status_FAILED | `Status_UNKNOWN
+]
+
+type k_ProvisioningTask_t = {
+  action: string;
+  description: string;
+  status: k_ProvisioningTask_status_t;
+  creation_date: string;
+  planned_date: string;
+  execution_date: string
+}
+
+type k_Profile_t = { identifier: int; name: string; forced: bool }
+
+type k_Offer_t = { id: int; name: string }
+
+type k_Number_t = { number: string }
+
+type k_NumberTranslation_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
+}
+
+type k_MobileAccount_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string
+}
 
 type k_MinutePlanStatistic_t = {
   unit: k_Unit_t;
@@ -18,15 +148,6 @@ type k_MinutePlanStatistic_t = {
   end_ts: int
 }
 
-type k_FaxTransfer_status_t = [
-    `In_service | `Setup_pending | `Suspended | `Cancelled
-  | `Cancellation_pending
-]
-
-type k_FaxTransfer_options_t = [ `Sms | `Crypt | `Supervision | `Iphone ]
-
-type k_FaxTransfer_blocking_status_t = [ `Pending | `Blocked ]
-
 type k_FaxTransfer_t = {
   csi: int;
   formatted_csi: string;
@@ -34,19 +155,10 @@ type k_FaxTransfer_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: int;
-  status: k_FaxTransfer_status_t;
-  blocking_status: k_FaxTransfer_blocking_status_t option;
-  options: k_FaxTransfer_options_t list
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
 }
-
-type k_EmailAccount_status_t = [
-    `In_service | `Setup_pending | `Suspended | `Cancelled
-  | `Cancellation_pending
-]
-
-type k_EmailAccount_options_t = [ `Sms | `Crypt | `Supervision | `Iphone ]
-
-type k_EmailAccount_blocking_status_t = [ `Pending | `Blocked ]
 
 type k_EmailAccount_t = {
   csi: int;
@@ -55,9 +167,9 @@ type k_EmailAccount_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_EmailAccount_status_t;
-  blocking_status: k_EmailAccount_blocking_status_t option;
-  options: k_EmailAccount_options_t list;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
   first_name: string;
   last_name: string;
   quota: int
@@ -105,15 +217,6 @@ type k_DataUsageStatistic_t = {
   end_ts: int
 }
 
-type k_DSLAccess_status_t = [
-    `In_service | `Setup_pending | `Suspended | `Cancelled
-  | `Cancellation_pending
-]
-
-type k_DSLAccess_options_t = [ `Sms | `Crypt | `Supervision | `Iphone ]
-
-type k_DSLAccess_blocking_status_t = [ `Pending | `Blocked ]
-
 type k_DSLAccess_t = {
   csi: int;
   formatted_csi: string;
@@ -121,9 +224,9 @@ type k_DSLAccess_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_DSLAccess_status_t;
-  blocking_status: k_DSLAccess_blocking_status_t option;
-  options: k_DSLAccess_options_t list;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
   reference_number: int;
   maximum_download_speed: int;
   maximum_upload_speed: int
@@ -176,15 +279,6 @@ type k_AudioFile_t = {
   base46_contents: string
 }
 
-type k_ACDService_status_t = [
-    `In_service | `Setup_pending | `Suspended | `Cancelled
-  | `Cancellation_pending
-]
-
-type k_ACDService_options_t = [ `Sms | `Crypt | `Supervision | `Iphone ]
-
-type k_ACDService_blocking_status_t = [ `Pending | `Blocked ]
-
 type k_ACDService_t = {
   csi: string;
   formatted_csi: string;
@@ -192,9 +286,9 @@ type k_ACDService_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_ACDService_status_t;
-  blocking_status: k_ACDService_blocking_status_t option;
-  options: k_ACDService_options_t list
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
 }
 
 type k_ACDProfile_t = { identifier: int; name: string; forced: bool }

@@ -1,9 +1,137 @@
 (* Auto-generated from "definitions.atd" *)
 [@@@ocaml.warning "-27-32-33-35-39"]
 
+type k_Voicemail_t = Definitions_t.k_Voicemail_t = {
+  name: string;
+  email: string;
+  recording_enabled: bool;
+  instructions_enabled: bool;
+  answering_audio_file_id: int;
+  recording_audio_file_id_unavailable: int;
+  recording_audio_file_id_busy: int
+}
+
+type k_VoicemailMessage_t = Definitions_t.k_VoicemailMessage_t = {
+  read: bool;
+  identifier: int;
+  caller_id: int;
+  timestamp: int;
+  duration: int;
+  wav_contents: string
+}
+
+type k_VoIPAccountProfile_t = Definitions_t.k_VoIPAccountProfile_t = {
+  identifier: string;
+  name: string;
+  backup_number: string;
+  forced: bool;
+  forward_delay: int;
+  forward_on_no_answer_number: int;
+  forward_to_voicemail: bool;
+  forward_unconditionally_number: string;
+  forward_use_account_callerid_presentation: bool
+}
+
+type k_Status_t = Definitions_t.k_Status_t
+
+type k_Options_t = Definitions_t.k_Options_t
+
+type k_Blocking_status_t = Definitions_t.k_Blocking_status_t
+
+type k_VirtualFaxAccount_t = Definitions_t.k_VirtualFaxAccount_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  email: string;
+  password: string
+}
+
 type k_Unit_t = Definitions_t.k_Unit_t
 
+type k_UCaaSVoIPAccount_t = Definitions_t.k_UCaaSVoIPAccount_t = {
+  csi: int;
+  formatted_csi: int;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  short_number: int;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string
+}
+
+type k_ServiceUpgrade_t = Definitions_t.k_ServiceUpgrade_t = {
+  result: string;
+  target_offer_id: int;
+  planned_date: string
+}
+
 type k_Scope_t = Definitions_t.k_Scope_t
+
+type k_SIPRecord_t = Definitions_t.k_SIPRecord_t = {
+  private_ip: string;
+  public_ip: string;
+  user_agent: string;
+  cdi: string
+}
+
+type k_ProvisioningTask_status_t = Definitions_t.k_ProvisioningTask_status_t
+
+type k_ProvisioningTask_t = Definitions_t.k_ProvisioningTask_t = {
+  action: string;
+  description: string;
+  status: k_ProvisioningTask_status_t;
+  creation_date: string;
+  planned_date: string;
+  execution_date: string
+}
+
+type k_Profile_t = Definitions_t.k_Profile_t = {
+  identifier: int;
+  name: string;
+  forced: bool
+}
+
+type k_Offer_t = Definitions_t.k_Offer_t = { id: int; name: string }
+
+type k_Number_t = Definitions_t.k_Number_t = { number: string }
+
+type k_NumberTranslation_t = Definitions_t.k_NumberTranslation_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
+}
+
+type k_MobileAccount_t = Definitions_t.k_MobileAccount_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string
+}
 
 type k_MinutePlanStatistic_t = Definitions_t.k_MinutePlanStatistic_t = {
   unit: k_Unit_t;
@@ -16,13 +144,6 @@ type k_MinutePlanStatistic_t = Definitions_t.k_MinutePlanStatistic_t = {
   end_ts: int
 }
 
-type k_FaxTransfer_status_t = Definitions_t.k_FaxTransfer_status_t
-
-type k_FaxTransfer_options_t = Definitions_t.k_FaxTransfer_options_t
-
-type k_FaxTransfer_blocking_status_t =
-  Definitions_t.k_FaxTransfer_blocking_status_t
-
 type k_FaxTransfer_t = Definitions_t.k_FaxTransfer_t = {
   csi: int;
   formatted_csi: string;
@@ -30,17 +151,10 @@ type k_FaxTransfer_t = Definitions_t.k_FaxTransfer_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: int;
-  status: k_FaxTransfer_status_t;
-  blocking_status: k_FaxTransfer_blocking_status_t option;
-  options: k_FaxTransfer_options_t list
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
 }
-
-type k_EmailAccount_status_t = Definitions_t.k_EmailAccount_status_t
-
-type k_EmailAccount_options_t = Definitions_t.k_EmailAccount_options_t
-
-type k_EmailAccount_blocking_status_t =
-  Definitions_t.k_EmailAccount_blocking_status_t
 
 type k_EmailAccount_t = Definitions_t.k_EmailAccount_t = {
   csi: int;
@@ -49,9 +163,9 @@ type k_EmailAccount_t = Definitions_t.k_EmailAccount_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_EmailAccount_status_t;
-  blocking_status: k_EmailAccount_blocking_status_t option;
-  options: k_EmailAccount_options_t list;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
   first_name: string;
   last_name: string;
   quota: int
@@ -99,13 +213,6 @@ type k_DataUsageStatistic_t = Definitions_t.k_DataUsageStatistic_t = {
   end_ts: int
 }
 
-type k_DSLAccess_status_t = Definitions_t.k_DSLAccess_status_t
-
-type k_DSLAccess_options_t = Definitions_t.k_DSLAccess_options_t
-
-type k_DSLAccess_blocking_status_t =
-  Definitions_t.k_DSLAccess_blocking_status_t
-
 type k_DSLAccess_t = Definitions_t.k_DSLAccess_t = {
   csi: int;
   formatted_csi: string;
@@ -113,9 +220,9 @@ type k_DSLAccess_t = Definitions_t.k_DSLAccess_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_DSLAccess_status_t;
-  blocking_status: k_DSLAccess_blocking_status_t option;
-  options: k_DSLAccess_options_t list;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list;
   reference_number: int;
   maximum_download_speed: int;
   maximum_upload_speed: int
@@ -173,13 +280,6 @@ type k_AudioFile_t = Definitions_t.k_AudioFile_t = {
   base46_contents: string
 }
 
-type k_ACDService_status_t = Definitions_t.k_ACDService_status_t
-
-type k_ACDService_options_t = Definitions_t.k_ACDService_options_t
-
-type k_ACDService_blocking_status_t =
-  Definitions_t.k_ACDService_blocking_status_t
-
 type k_ACDService_t = Definitions_t.k_ACDService_t = {
   csi: string;
   formatted_csi: string;
@@ -187,9 +287,9 @@ type k_ACDService_t = Definitions_t.k_ACDService_t = {
   offer_id: int;
   offer_name: string;
   commitment_start_date: string;
-  status: k_ACDService_status_t;
-  blocking_status: k_ACDService_blocking_status_t option;
-  options: k_ACDService_options_t list
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t option;
+  options: k_Options_t list
 }
 
 type k_ACDProfile_t = Definitions_t.k_ACDProfile_t = {
@@ -198,46 +298,73 @@ type k_ACDProfile_t = Definitions_t.k_ACDProfile_t = {
   forced: bool
 }
 
+let validate_k_Voicemail_t : _ -> k_Voicemail_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_VoicemailMessage_t : _ -> k_VoicemailMessage_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_VoIPAccountProfile_t : _ -> k_VoIPAccountProfile_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_Status_t = (
+  fun _ _ -> None
+)
+let validate_k_Options_t = (
+  fun _ _ -> None
+)
+let validate_k_Blocking_status_t = (
+  fun _ _ -> None
+)
+let validate__k_Options_t_list = (
+  fun _ _ -> None
+)
+let validate__k_Blocking_status_t_nullable = (
+  fun _ _ -> None
+)
+let validate_k_VirtualFaxAccount_t : _ -> k_VirtualFaxAccount_t -> _ = (
+  fun _ _ -> None
+)
 let validate_k_Unit_t = (
+  fun _ _ -> None
+)
+let validate_k_UCaaSVoIPAccount_t : _ -> k_UCaaSVoIPAccount_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_ServiceUpgrade_t : _ -> k_ServiceUpgrade_t -> _ = (
   fun _ _ -> None
 )
 let validate_k_Scope_t = (
   fun _ _ -> None
 )
+let validate_k_SIPRecord_t : _ -> k_SIPRecord_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_ProvisioningTask_status_t = (
+  fun _ _ -> None
+)
+let validate_k_ProvisioningTask_t : _ -> k_ProvisioningTask_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_Profile_t : _ -> k_Profile_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_Offer_t : _ -> k_Offer_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_Number_t : _ -> k_Number_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_NumberTranslation_t : _ -> k_NumberTranslation_t -> _ = (
+  fun _ _ -> None
+)
+let validate_k_MobileAccount_t : _ -> k_MobileAccount_t -> _ = (
+  fun _ _ -> None
+)
 let validate_k_MinutePlanStatistic_t : _ -> k_MinutePlanStatistic_t -> _ = (
   fun _ _ -> None
 )
-let validate_k_FaxTransfer_status_t = (
-  fun _ _ -> None
-)
-let validate_k_FaxTransfer_options_t = (
-  fun _ _ -> None
-)
-let validate_k_FaxTransfer_blocking_status_t = (
-  fun _ _ -> None
-)
-let validate__nullable_2989c45 = (
-  fun _ _ -> None
-)
-let validate__k_FaxTransfer_options_t_list = (
-  fun _ _ -> None
-)
 let validate_k_FaxTransfer_t : _ -> k_FaxTransfer_t -> _ = (
-  fun _ _ -> None
-)
-let validate_k_EmailAccount_status_t = (
-  fun _ _ -> None
-)
-let validate_k_EmailAccount_options_t = (
-  fun _ _ -> None
-)
-let validate_k_EmailAccount_blocking_status_t = (
-  fun _ _ -> None
-)
-let validate__nullable_2146145 = (
-  fun _ _ -> None
-)
-let validate__k_EmailAccount_options_t_list = (
   fun _ _ -> None
 )
 let validate_k_EmailAccount_t : _ -> k_EmailAccount_t -> _ = (
@@ -250,21 +377,6 @@ let validate_k_DirectoryBranch_t : _ -> k_DirectoryBranch_t -> _ = (
   fun _ _ -> None
 )
 let validate_k_DataUsageStatistic_t : _ -> k_DataUsageStatistic_t -> _ = (
-  fun _ _ -> None
-)
-let validate_k_DSLAccess_status_t = (
-  fun _ _ -> None
-)
-let validate_k_DSLAccess_options_t = (
-  fun _ _ -> None
-)
-let validate_k_DSLAccess_blocking_status_t = (
-  fun _ _ -> None
-)
-let validate__nullable_91a4b3b = (
-  fun _ _ -> None
-)
-let validate__k_DSLAccess_options_t_list = (
   fun _ _ -> None
 )
 let validate_k_DSLAccess_t : _ -> k_DSLAccess_t -> _ = (
@@ -294,27 +406,236 @@ let validate_k_CSIToken_t : _ -> k_CSIToken_t -> _ = (
 let validate_k_AudioFile_t : _ -> k_AudioFile_t -> _ = (
   fun _ _ -> None
 )
-let validate_k_ACDService_status_t = (
-  fun _ _ -> None
-)
-let validate_k_ACDService_options_t = (
-  fun _ _ -> None
-)
-let validate_k_ACDService_blocking_status_t = (
-  fun _ _ -> None
-)
-let validate__nullable_7b64331 = (
-  fun _ _ -> None
-)
-let validate__k_ACDService_options_t_list = (
-  fun _ _ -> None
-)
 let validate_k_ACDService_t : _ -> k_ACDService_t -> _ = (
   fun _ _ -> None
 )
 let validate_k_ACDProfile_t : _ -> k_ACDProfile_t -> _ = (
   fun _ _ -> None
 )
+let create_k_Voicemail_t 
+  ~name
+  ~email
+  ~recording_enabled
+  ~instructions_enabled
+  ~answering_audio_file_id
+  ~recording_audio_file_id_unavailable
+  ~recording_audio_file_id_busy
+  () : k_Voicemail_t =
+  {
+    name = name;
+    email = email;
+    recording_enabled = recording_enabled;
+    instructions_enabled = instructions_enabled;
+    answering_audio_file_id = answering_audio_file_id;
+    recording_audio_file_id_unavailable = recording_audio_file_id_unavailable;
+    recording_audio_file_id_busy = recording_audio_file_id_busy;
+  }
+let create_k_VoicemailMessage_t 
+  ~read
+  ~identifier
+  ~caller_id
+  ~timestamp
+  ~duration
+  ~wav_contents
+  () : k_VoicemailMessage_t =
+  {
+    read = read;
+    identifier = identifier;
+    caller_id = caller_id;
+    timestamp = timestamp;
+    duration = duration;
+    wav_contents = wav_contents;
+  }
+let create_k_VoIPAccountProfile_t 
+  ~identifier
+  ~name
+  ~backup_number
+  ~forced
+  ~forward_delay
+  ~forward_on_no_answer_number
+  ~forward_to_voicemail
+  ~forward_unconditionally_number
+  ~forward_use_account_callerid_presentation
+  () : k_VoIPAccountProfile_t =
+  {
+    identifier = identifier;
+    name = name;
+    backup_number = backup_number;
+    forced = forced;
+    forward_delay = forward_delay;
+    forward_on_no_answer_number = forward_on_no_answer_number;
+    forward_to_voicemail = forward_to_voicemail;
+    forward_unconditionally_number = forward_unconditionally_number;
+    forward_use_account_callerid_presentation = forward_use_account_callerid_presentation;
+  }
+let create_k_VirtualFaxAccount_t 
+  ~csi
+  ~formatted_csi
+  ~name
+  ~offer_id
+  ~offer_name
+  ~commitment_start_date
+  ~status
+  ~blocking_status
+  ~options
+  ~email
+  ~password
+  () : k_VirtualFaxAccount_t =
+  {
+    csi = csi;
+    formatted_csi = formatted_csi;
+    name = name;
+    offer_id = offer_id;
+    offer_name = offer_name;
+    commitment_start_date = commitment_start_date;
+    status = status;
+    blocking_status = blocking_status;
+    options = options;
+    email = email;
+    password = password;
+  }
+let create_k_UCaaSVoIPAccount_t 
+  ~csi
+  ~formatted_csi
+  ~name
+  ~offer_id
+  ~offer_name
+  ~commitment_start_date
+  ~status
+  ~blocking_status
+  ~options
+  ~short_number
+  ~incoming_acd_calls_allowed
+  ~presented_number
+  ~presented_number_raw
+  () : k_UCaaSVoIPAccount_t =
+  {
+    csi = csi;
+    formatted_csi = formatted_csi;
+    name = name;
+    offer_id = offer_id;
+    offer_name = offer_name;
+    commitment_start_date = commitment_start_date;
+    status = status;
+    blocking_status = blocking_status;
+    options = options;
+    short_number = short_number;
+    incoming_acd_calls_allowed = incoming_acd_calls_allowed;
+    presented_number = presented_number;
+    presented_number_raw = presented_number_raw;
+  }
+let create_k_ServiceUpgrade_t 
+  ~result
+  ~target_offer_id
+  ~planned_date
+  () : k_ServiceUpgrade_t =
+  {
+    result = result;
+    target_offer_id = target_offer_id;
+    planned_date = planned_date;
+  }
+let create_k_SIPRecord_t 
+  ~private_ip
+  ~public_ip
+  ~user_agent
+  ~cdi
+  () : k_SIPRecord_t =
+  {
+    private_ip = private_ip;
+    public_ip = public_ip;
+    user_agent = user_agent;
+    cdi = cdi;
+  }
+let create_k_ProvisioningTask_t 
+  ~action
+  ~description
+  ~status
+  ~creation_date
+  ~planned_date
+  ~execution_date
+  () : k_ProvisioningTask_t =
+  {
+    action = action;
+    description = description;
+    status = status;
+    creation_date = creation_date;
+    planned_date = planned_date;
+    execution_date = execution_date;
+  }
+let create_k_Profile_t 
+  ~identifier
+  ~name
+  ~forced
+  () : k_Profile_t =
+  {
+    identifier = identifier;
+    name = name;
+    forced = forced;
+  }
+let create_k_Offer_t 
+  ~id
+  ~name
+  () : k_Offer_t =
+  {
+    id = id;
+    name = name;
+  }
+let create_k_Number_t 
+  ~number
+  () : k_Number_t =
+  {
+    number = number;
+  }
+let create_k_NumberTranslation_t 
+  ~csi
+  ~formatted_csi
+  ~name
+  ~offer_id
+  ~offer_name
+  ~commitment_start_date
+  ~status
+  ~blocking_status
+  ~options
+  () : k_NumberTranslation_t =
+  {
+    csi = csi;
+    formatted_csi = formatted_csi;
+    name = name;
+    offer_id = offer_id;
+    offer_name = offer_name;
+    commitment_start_date = commitment_start_date;
+    status = status;
+    blocking_status = blocking_status;
+    options = options;
+  }
+let create_k_MobileAccount_t 
+  ~csi
+  ~formatted_csi
+  ~name
+  ~offer_id
+  ~offer_name
+  ~commitment_start_date
+  ~status
+  ~blocking_status
+  ~options
+  ~incoming_acd_calls_allowed
+  ~presented_number
+  ~presented_number_raw
+  () : k_MobileAccount_t =
+  {
+    csi = csi;
+    formatted_csi = formatted_csi;
+    name = name;
+    offer_id = offer_id;
+    offer_name = offer_name;
+    commitment_start_date = commitment_start_date;
+    status = status;
+    blocking_status = blocking_status;
+    options = options;
+    incoming_acd_calls_allowed = incoming_acd_calls_allowed;
+    presented_number = presented_number;
+    presented_number_raw = presented_number_raw;
+  }
 let create_k_MinutePlanStatistic_t 
   ~unit
   ~total

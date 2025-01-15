@@ -25,11 +25,25 @@ type k_Status_t = [
   | Cancellation_pending <json name="cancellation_pending"> ]
 
 (*
-
+ *
+ * BlockingStatus 
+ *
  *)
-type k_DSLAccess_blocking_status_t = [
+type k_Blocking_status_t = [
   | Pending <json name="pending">
   | Blocked <json name="blocked">
+]
+
+(* 
+ *
+ * Options 
+ *
+ *)
+type k_Options_t = [
+  | Sms <json name="sms">
+  | Crypt <json name="crypt">
+  | Supervision <json name="supervision">
+  | Iphone <json name="iphone">
 ]
 
 
@@ -63,14 +77,6 @@ type k_ACDProfile_t = {
  * ACDService 
  *
  *)
-
-type k_ACDService_options_t = [
-  | Sms <json name="sms">
-  | Crypt <json name="crypt">
-  | Supervision <json name="supervision">
-  | Iphone <json name="iphone"> ]
-
-
 type k_ACDService_t = {
   csi: string;
   formatted_csi: string;
@@ -79,8 +85,8 @@ type k_ACDService_t = {
   offer_name: string;
   commitment_start_date: string;
   status: k_Status_t;
-  blocking_status: k_ACDService_blocking_status_t nullable;
-  options: k_ACDService_options_t list;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
 }
 
 
@@ -240,13 +246,6 @@ type k_DirectoryContact_t = {
  *)
 
 
-type k_DSLAccess_options_t = [
-  | Sms <json name="sms">
-  | Crypt <json name="crypt">
-  | Supervision <json name="supervision">
-  | Iphone <json name="iphone">
-]
-
 type k_DSLAccess_t = {
   csi: int;
   formatted_csi: string;
@@ -255,8 +254,8 @@ type k_DSLAccess_t = {
   offer_name: string;
   commitment_start_date: string;
   status: k_Status_t;
-  blocking_status: k_DSLAccess_blocking_status_t nullable;
-  options: k_DSLAccess_options_t list;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
   reference_number: int;
   maximum_download_speed: int;
   maximum_upload_speed: int;
@@ -267,19 +266,6 @@ type k_DSLAccess_t = {
  * EmailAccount 
  *
  *)
-
-type k_EmailAccount_blocking_status_t = [
-  | Pending <json name="pending">
-  | Blocked <json name="blocked">
-]
-
-type k_EmailAccount_options_t = [
-  | Sms <json name ="sms">
-  | Crypt <json name="crypt">
-  | Supervision <json name="supervision">
-  | Iphone <json name="iphone">
-] 
-
 type k_EmailAccount_t = {
   csi: int;
   formatted_csi: string;
@@ -288,8 +274,8 @@ type k_EmailAccount_t = {
   offer_name: string;
   commitment_start_date: string;
   status: k_Status_t;
-  blocking_status: k_EmailAccount_blocking_status_t nullable;
-  options: k_EmailAccount_options_t list;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
   first_name: string;
   last_name: string;
   quota: int;
@@ -300,19 +286,6 @@ type k_EmailAccount_t = {
  * FaxTransfer 
  *
  *)
-
-type k_FaxTransfer_blocking_status_t = [
-  | Pending <json name="pending">
-  | Blocked <json name="blocked">
-]
-
-type k_FaxTransfer_options_t = [
-  | Sms <json name ="sms">
-  | Crypt <json name="crypt">
-  | Supervision <json name="supervision">
-  | Iphone <json name="iphone">
-] 
-
 type k_FaxTransfer_t = {
   csi: int;
   formatted_csi: string;
@@ -321,8 +294,8 @@ type k_FaxTransfer_t = {
   offer_name: string;
   commitment_start_date: int;
   status: k_Status_t;
-  blocking_status: k_FaxTransfer_blocking_status_t nullable;
-  options: k_FaxTransfer_options_t list;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
 }
 
 (* 
@@ -347,18 +320,232 @@ type k_MinutePlanStatistic_t = {
  *
  *)
 type k_MobileAccount_t = {
-  csi 	The Common Service Identifier of the service
-  formatted_csi 	The CSI number using the E.164 format
-  name 	The name associated with the service
-  offer_id 	The unique identifier of the offer this service is associated to
-  offer_name 	The name of the offer this service is associated to
-  commitment_start_date 	The date when the commitment to the offer begins
-  status 	The status of this service. Can be one of: 'in_service', 'setup_pending', 'suspended', 'cancelled', 'cancellation_pending'
-  blocking_status 	The blocking status of this service. Can be one of: 'pending', 'blocked', or null (non-blocked)
-  options 	Return the list of commercial options enabled on this service. Can contain one or several of: 'sms', 'crypt', 'supervision', 'iphone'
-  incoming_acd_calls_allowed 	Boolean indicating whether calls coming from an ACD service are distributed
-  presented_number 	The presented number using the E.164 format (can be a number e.g. +33123456789, the value "hidden" for anonymous calls or "null" if the original number has not been changed)
-  presented_number_raw 	The presented number in a raw format 
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string;
 }
+
+(* 
+ *
+ * Number 
+ *
+ *)
+ type k_Number_t = {
+  number: string;
+ }
+
+(* 
+ *
+ * NumberTranslation 
+ *
+ *)
+type k_NumberTranslation_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
+}
+
+(* 
+ *
+ * Offer 
+ *
+ *)
+type k_Offer_t = {
+  id: int;
+  name: string;
+}
+
+(* 
+ *
+ * Profile 
+ *
+ *)
+type k_Profile_t = {
+  identifier: int;
+  name: string;
+  forced: bool;
+}
+
+(* 
+ *
+ * ProvisioningTask 
+ *
+ *)
+type k_ProvisioningTask_status_t = [
+  | Status_TODO <json name="TODO">
+  | Status_WAIT <json name="WAIT">
+  | Status_DONE <json name="DONE">
+  | Status_ERROR <json name="ERROR">
+  | Status_CANCEL <json name="CANCEL">
+  | Status_FAILED <json name="FAILED">
+  | Status_UNKNOWN <json name="UNKNOWN">
+]
+type k_ProvisioningTask_t = {
+  action: string;
+  description: string;
+  status: k_ProvisioningTask_status_t;
+  creation_date: string;
+  planned_date: string;
+  execution_date: string;
+}
+
+(* 
+ *
+ * ServiceUpgrade 
+ *
+ *)
+type k_ServiceUpgrade_t = {
+  result: string;
+  target_offer_id: int;
+  planned_date: string;
+}
+
+(* 
+ *
+ * SIPRecord 
+ *
+ *)
+type k_SIPRecord_t = {
+  private_ip: string;
+  public_ip: string;
+  user_agent: string;
+  cdi: string;
+}
+
+(* 
+ *
+ * UCaaSVoIPAccount 
+ *
+ *)
+type k_UCaaSVoIPAccount_t = {
+  csi: int;
+  formatted_csi: int;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
+  short_number: int;
+  incoming_acd_calls_allowed: bool;
+  presented_number: string;
+  presented_number_raw: string;
+}
+
+(* 
+ *
+ * VirtualFaxAccount
+ *
+ *)
+type k_VirtualFaxAccount_t = {
+  csi: int;
+  formatted_csi: string;
+  name: string;
+  offer_id: int;
+  offer_name: string;
+  commitment_start_date: string;
+  status: k_Status_t;
+  blocking_status: k_Blocking_status_t nullable;
+  options: k_Options_t list;
+  email: string;
+  password: string;
+}
+
+
+(* 
+ *
+ * Voicemail 
+ *
+ *)
+type k_Voicemail_t = {
+  name: string;
+  email: string;
+  recording_enabled: bool;
+  instructions_enabled: bool;
+  answering_audio_file_id: int;
+  recording_audio_file_id_unavailable: int;
+  recording_audio_file_id_busy: int;
+}
+
+(* 
+ *
+ * VoicemailMessage 
+ *
+ *)
+type k_VoicemailMessage_t = {
+  read: bool;
+  identifier: int;
+  caller_id: int;
+  timestamp: int;
+  duration: int;
+  wav_contents: string;
+}
+
+(* 
+ *
+ * VoIPAccountProfile 
+ *
+ *)
+type k_VoIPAccountProfile_t = {
+  identifier: string;
+  name: string;
+  backup_number: string;
+  forced: bool;
+  forward_delay: int;
+  forward_on_no_answer_number: int;
+  forward_to_voicemail: bool;
+  forward_unconditionally_number: string;
+  forward_use_account_callerid_presentation: bool;
+}
+
+(* 
+ *
+ * MobileAccount 
+ *
+ *)
+
+
+(* 
+ *
+ * MobileAccount 
+ *
+ *)
+
+
+(* 
+ *
+ * MobileAccount 
+ *
+ *)
+
+
+(* 
+ *
+ * MobileAccount 
+ *
+ *)
+
+
+(* 
+ *
+ * MobileAccount 
+ *
+ *)
 
 
