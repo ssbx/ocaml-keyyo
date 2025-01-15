@@ -40,7 +40,7 @@ let () =
   let csi_token = Keyyo.Types.CSIToken.create 
     ~result:`Success
     ~token:"lkh"
-    ~domain_masks:[]
+    ~domain_masks:["lk"]
     ~timestamp:0
     ()  in
   let _ = Keyyo.Types.CSIToken.to_pretty_json csi_token in
